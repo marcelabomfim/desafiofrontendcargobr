@@ -2,11 +2,25 @@ import { injectGlobal } from 'styled-components';
 import styledNormalize from 'styled-normalize';
 
 export const theme = {
-  primary: '#4E13F0',
-  secondary: '#4B545B',
-  text: '#F2F2F6',
-  background: '#FFFFFF',
-  darkBackground: '#1D232E'
+  colors: {
+    primary: '#3765af',
+    secondary: '#FF636E',
+    text: '#1D232E',
+    lightText: '#F2F2F6',
+    background: '#F6F9F8'
+  },
+  spacing: {
+    xsmall: '4px',
+    small: '8px',
+    base: '16px',
+    large: '24px',
+    xlarge: '48px'
+  },
+  breakpoints: {
+    small: '576px',
+    medium: '768px',
+    large: '992px'
+  }
 };
 
 injectGlobal`
@@ -20,9 +34,12 @@ injectGlobal`
     padding: 0;
     margin: 0;
     font-family: sans-serif;
+    background: ${theme.colors.background};
+    color: ${theme.colors.text};
   }
 
   a, a:visited, a:focus {
     color: inherit;
+    text-decoration: none;
   }
 `;

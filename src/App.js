@@ -5,9 +5,8 @@ import { ThemeProvider } from 'styled-components';
 
 import { theme } from 'theme';
 
-import Container from 'components/ui/Container';
+import Container from 'components/Container';
 import Header from 'components/Header';
-import Footer from 'components/Footer';
 
 import Home from 'pages/Home';
 import About from 'pages/About';
@@ -17,15 +16,16 @@ class App extends Component {
     return (
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <ThemeProvider theme={theme}>
-          <Container>
+          <main>
             <Helmet title="Buy React.js Developers" />
             <Header />
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/about" component={About} />
-            </Switch>
-            <Footer />
-          </Container>
+            <Container>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/about" component={About} />
+              </Switch>
+            </Container>
+          </main>
         </ThemeProvider>
       </BrowserRouter>
     );

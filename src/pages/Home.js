@@ -32,7 +32,7 @@ class App extends Component {
     return (
       <div>
         {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
-        {isLoading ? 'Loading ...' : JSON.stringify(membersList)}
+        {isLoading ? 'Loading ...' : membersList.length}
       </div>
     );
   }
