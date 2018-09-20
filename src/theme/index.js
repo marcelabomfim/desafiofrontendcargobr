@@ -7,7 +7,8 @@ export const theme = {
     secondary: '#FF636E',
     text: '#1D232E',
     lightText: '#F2F2F6',
-    background: '#F6F9F8'
+    background: '#F6F9F8',
+    selectedColor: '#00C38A'
   },
   spacing: {
     xsmall: '4px',

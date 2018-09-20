@@ -8,8 +8,8 @@ import { theme } from 'theme';
 import Container from 'components/Container';
 import Header from 'components/Header';
 
-import Home from 'pages/Home';
-import About from 'pages/About';
+import Home from 'containers/Home';
+import About from 'containers/About';
 
 class App extends Component {
   render() {

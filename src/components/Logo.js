@@ -16,15 +16,28 @@ const Logo = styled(NavLink)`
   justify-content: start;
 
   img {
-    width: 80px;
-    height: 80px;
-    margin-right: 20px;
+    width: 50px;
+    height: 50px;
+    margin-right: ${({ theme }) => theme.spacing.small};
   }
 
   h1 {
-    width: 230px;
+    width: 130px;
     margin: 0;
-    font-size: 2em;
+    font-size: 20px;
     color: ${({ theme }) => theme.colors.primary};
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.small}) {
+    img {
+      width: 80px;
+      height: 80px;
+      margin-right: ${({ theme }) => theme.spacing.large};
+    }
+
+    h1 {
+      width: 230px;
+      font-size: 32px;
+    }
   }
 `;

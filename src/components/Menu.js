@@ -28,10 +28,12 @@ const Menu = styled.nav`
     margin: 0;
 
     li {
-      display: inline-block;
+      display: block;
       list-style: none;
-      padding: 5px 20px;
+      padding: 0 20px;
       color: ${({ theme }) => theme.colors.primary};
+      font-size: 14px;
+      margin: ${({ theme }) => theme.spacing.xsmall} 0;
 
       &:hover {
         color: ${({ theme }) => lighten(0.2, theme.colors.primary)};
@@ -40,6 +42,13 @@ const Menu = styled.nav`
       .active {
         font-weight: bold;
       }
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.small}) {
+    ul li {
+      display: inline-block;
+      font-size: 16px;
     }
   }
 `;
