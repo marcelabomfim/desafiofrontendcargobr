@@ -26,11 +26,13 @@ const Menu = styled.nav`
 
   ul {
     margin: 0;
+    padding: 0;
+    padding-right: ${({ theme }) => theme.spacing.base};
 
     li {
       display: block;
       list-style: none;
-      padding: 0 20px;
+      padding-left: ${({ theme }) => theme.spacing.large};
       color: ${({ theme }) => theme.colors.primary};
       font-size: 14px;
       margin: ${({ theme }) => theme.spacing.xsmall} 0;

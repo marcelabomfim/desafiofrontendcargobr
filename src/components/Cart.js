@@ -16,7 +16,7 @@ export default ({ total, selectedMembers }) => (
 );
 
 const Cart = styled.div`
-  width: 100%;
+  width: 100vw;
   height: auto;
   position: fixed;
   bottom: 0;

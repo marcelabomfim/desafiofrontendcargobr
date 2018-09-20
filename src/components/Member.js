@@ -95,7 +95,6 @@ const Member = styled.div`
       span {
         font-size: 14px;
         font-weight: bold;
-        vertical-align: middle;
         margin-right: 4px;
       }
     }
