@@ -7,6 +7,8 @@ import isMemberSelected from 'utils/isMemberSelected';
 import memberPrice from 'utils/memberPrice';
 
 class Home extends Component {
+  mounted = false;
+
   state = {
     errorMessage: false,
     isLoading: true,
@@ -15,11 +17,23 @@ class Home extends Component {
   };
 
   componentDidMount() {
+    this.mounted = true;
+
     Api.Github.getOrgMembers('reactjs')
       .then(res => {
-        this.getMembersInfo(res.data);
+        if (this.mounted) {
+          this.getMembersInfo(res.data);
+        }
       })
-      .catch(() => this.setErrorStatus());
+      .catch(() => {
+        if (this.mounted) {
+          this.setErrorStatus();
+        }
+      });
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
   }
 
   getMembersInfo = orgMembers => {
