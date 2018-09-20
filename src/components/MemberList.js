@@ -22,7 +22,7 @@ const MemberList = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
   grid-gap: ${({ theme }) => theme.spacing.small + ' ' + theme.spacing.small};
-  margin-bottom: ${({ theme }) => theme.spacing.xlarge};
+  margin-bottom: 100px;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.medium}) {
     grid-template-columns: 1fr 1fr 1fr;

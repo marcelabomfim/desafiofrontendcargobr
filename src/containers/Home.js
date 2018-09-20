@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 
 import Api from 'services';
 import MemberList from 'components/MemberList';
+import Cart from 'components/Cart';
 import isMemberSelected from 'utils/isMemberSelected';
+import memberPrice from 'utils/memberPrice';
 
 class App extends Component {
   state = {
@@ -63,17 +65,24 @@ class App extends Component {
       selectedMembers
     } = this.state;
 
+    const total = membersList
+      .filter(member => isMemberSelected(selectedMembers, member.id))
+      .reduce((sum, member) => sum + memberPrice(member), 0);
+
     return (
       <div>
         {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
         {isLoading ? (
           'Loading ...'
         ) : (
-          <MemberList
-            members={membersList}
-            selectedMembers={selectedMembers}
-            handleMemberSelect={this.handleMemberSelect}
-          />
+          <React.Fragment>
+            <MemberList
+              members={membersList}
+              selectedMembers={selectedMembers}
+              handleMemberSelect={this.handleMemberSelect}
+            />
+            <Cart total={total} selectedMembers={selectedMembers} />
+          </React.Fragment>
         )}
       </div>
     );

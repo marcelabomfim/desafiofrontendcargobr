@@ -29,6 +29,7 @@ injectGlobal`
 
   *, *:before, *:after {
     box-sizing: border-box;
+    outline: none;
   }
 
   body {
