@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const memberPrice = member =>
-  member.public_repos + member.followers + member.following;
+import memberPrice from 'utils/memberPrice';
 
-export default ({ member }) => (
+export default ({ member, selected, handleMemberSelect }) => (
   <Member>
     <header>
       <img src={member.avatar_url} alt={member.name} />
@@ -25,7 +24,12 @@ export default ({ member }) => (
         <span>{member.following}</span>
         Following
       </p>
-      <button>Select</button>
+      <button
+        className={selected ? 'is-selected' : ''}
+        onClick={() => handleMemberSelect(member.id)}
+      >
+        {selected ? 'Selected' : 'Select'}
+      </button>
     </footer>
   </Member>
 );
@@ -108,7 +112,7 @@ const Member = styled.div`
       border-radius: ${({ theme }) => theme.spacing.small};
       cursor: pointer;
 
-      &.active {
+      &.is-selected {
         border: 1px solid ${({ theme }) => theme.colors.selectedColor};
         color: #fff;
         background: ${({ theme }) => theme.colors.selectedColor};

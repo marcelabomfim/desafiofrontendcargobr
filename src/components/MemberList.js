@@ -2,11 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Member from 'components/Member';
+import isMemberSelected from 'utils/isMemberSelected';
 
-export default ({ members }) => (
+export default ({ members, selectedMembers, handleMemberSelect }) => (
   <MemberList>
     {members.map(member => (
-      <Member member={member} key={member.id} />
+      <Member
+        member={member}
+        selected={isMemberSelected(selectedMembers, member.id)}
+        handleMemberSelect={handleMemberSelect}
+        key={member.id}
+      />
     ))}
   </MemberList>
 );

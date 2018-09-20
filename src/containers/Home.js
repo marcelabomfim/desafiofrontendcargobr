@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 
 import Api from 'services';
 import MemberList from 'components/MemberList';
+import isMemberSelected from 'utils/isMemberSelected';
 
 class App extends Component {
   state = {
     errorMessage: false,
     isLoading: true,
-    membersList: []
+    membersList: [],
+    selectedMembers: []
   };
 
   async componentWillMount() {
@@ -40,12 +42,39 @@ class App extends Component {
     });
   };
 
+  handleMemberSelect = memberId => {
+    const { selectedMembers } = this.state;
+    let newSelectedMembers;
+
+    if (isMemberSelected(selectedMembers, memberId)) {
+      newSelectedMembers = selectedMembers.filter(id => id !== memberId);
+    } else {
+      newSelectedMembers = [...selectedMembers, memberId];
+    }
+
+    this.setState({ selectedMembers: newSelectedMembers });
+  };
+
   render() {
-    const { errorMessage, isLoading, membersList } = this.state;
+    const {
+      errorMessage,
+      isLoading,
+      membersList,
+      selectedMembers
+    } = this.state;
+
     return (
       <div>
         {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
-        {isLoading ? 'Loading ...' : <MemberList members={membersList} />}
+        {isLoading ? (
+          'Loading ...'
+        ) : (
+          <MemberList
+            members={membersList}
+            selectedMembers={selectedMembers}
+            handleMemberSelect={this.handleMemberSelect}
+          />
+        )}
       </div>
     );
   }
