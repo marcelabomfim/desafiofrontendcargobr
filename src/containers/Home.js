@@ -6,7 +6,7 @@ import Cart from 'components/Cart';
 import isMemberSelected from 'utils/isMemberSelected';
 import memberPrice from 'utils/memberPrice';
 
-class App extends Component {
+class Home extends Component {
   state = {
     errorMessage: false,
     isLoading: true,
@@ -14,27 +14,26 @@ class App extends Component {
     selectedMembers: []
   };
 
-  async componentWillMount() {
-    const orgMembers = await Api.Github.getOrgMembers('reactjs')
-      .then(res => res.data)
+  componentDidMount() {
+    Api.Github.getOrgMembers('reactjs')
+      .then(res => {
+        this.getMembersInfo(res.data);
+      })
       .catch(() => this.setErrorStatus());
-
-    await orgMembers.map(
-      async member =>
-        await Api.Github.getMember(member.login)
-          .then(res => {
-            this.setState(prevState => ({
-              membersList: [...prevState.membersList, res.data]
-            }));
-          })
-          .catch(() => this.setErrorStatus())
-    );
-
-    this.setState({
-      errorMessage: false,
-      isLoading: false
-    });
   }
+
+  getMembersInfo = orgMembers => {
+    if (!orgMembers) return;
+
+    orgMembers.map(member =>
+      Api.Github.getMember(member.login).then(res => {
+        this.setState(prevState => ({
+          isLoading: false,
+          membersList: [...prevState.membersList, res.data]
+        }));
+      })
+    );
+  };
 
   setErrorStatus = () => {
     this.setState({
@@ -89,4 +88,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Home;
