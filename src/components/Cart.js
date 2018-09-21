@@ -27,16 +27,18 @@ const Cart = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
-  background: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.primary};
   color: #fff;
   box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.1);
-  transition: bottom ease .3s;
+  transition: bottom ease .3s, background-color ease .3s;
 
   &.is-empty {
     bottom: -100px;
   }
 
   &.show-message {
+    background-color: ${({ theme }) => theme.colors.selectedColor};
+
     .total, button {
       opacity: 0;
     }
