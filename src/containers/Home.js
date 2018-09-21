@@ -10,6 +10,7 @@ class Home extends Component {
   mounted = false;
 
   state = {
+    successMessage: false,
     errorMessage: false,
     isLoading: true,
     membersList: [],
@@ -70,8 +71,25 @@ class Home extends Component {
     this.setState({ selectedMembers: newSelectedMembers });
   };
 
+  handleCheckout = qty => {
+    const { selectedMembers } = this.state;
+    this.setState({
+      successMessage: `Congratulations, you buy ${
+        selectedMembers.length
+      } React.js developer${selectedMembers.length > 1 ? 's' : ''}!`
+    });
+
+    setTimeout(() => {
+      this.setState({
+        successMessage: false,
+        selectedMembers: []
+      });
+    }, 3000);
+  };
+
   render() {
     const {
+      successMessage,
       errorMessage,
       isLoading,
       membersList,
@@ -94,7 +112,12 @@ class Home extends Component {
               selectedMembers={selectedMembers}
               handleMemberSelect={this.handleMemberSelect}
             />
-            <Cart total={total} selectedMembers={selectedMembers} />
+            <Cart
+              total={total}
+              selectedMembers={selectedMembers}
+              handleCheckout={this.handleCheckout}
+              successMessage={successMessage}
+            />
           </React.Fragment>
         )}
       </div>

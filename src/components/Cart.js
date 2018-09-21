@@ -3,14 +3,20 @@ import styled from 'styled-components';
 
 import Container from 'components/Container';
 
-export default ({ total, selectedMembers }) => (
-  <Cart className={selectedMembers.length === 0 ? 'is-empty' : ''}>
+export default ({ total, selectedMembers, handleCheckout, successMessage }) => (
+  <Cart
+    className={
+      (selectedMembers.length === 0 ? 'is-empty' : '') +
+      (successMessage ? 'show-message' : '')
+    }
+  >
     <Container>
-      <p>
+      <p className="total">
         <span>$ {total}</span>({selectedMembers.length} member
         {selectedMembers.length > 1 && 's'})
       </p>
-      <button>Checkout</button>
+      <button onClick={handleCheckout}>Checkout</button>
+      <p className="message">{successMessage}</p>
     </Container>
   </Cart>
 );
@@ -30,15 +36,27 @@ const Cart = styled.div`
     bottom: -100px;
   }
 
+  &.show-message {
+    .total, button {
+      opacity: 0;
+    }
+
+    .message {
+      opacity: 1;
+      top: ${({ theme }) => theme.spacing.base};
+    }
+  }
+
   & > div {
     display: flex;
     justify-content: space-between;
     padding: ${({ theme }) => theme.spacing.base};
   }
 
-  p {
+  .total {
     font-size: 14px;
     margin: 0;
+    transition: opacity ease .3s;
 
     span {
       display: block;
@@ -46,6 +64,16 @@ const Cart = styled.div`
       font-weight: bold;
       margin-right: ${({ theme }) => theme.spacing.xsmall};
     }
+  }
+
+  .message {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 100px;
+    left: 0;
+    opacity: 0;
+    transition: top ease .3s, opacity ease .3s;
   }
 
   button {
@@ -57,6 +85,7 @@ const Cart = styled.div`
         theme.spacing.small + ' ' + theme.spacing.xlarge};
       border-radius: ${({ theme }) => theme.spacing.small};
       cursor: pointer;
+      transition: opacity ease .3s;
     }
   }
 `;
